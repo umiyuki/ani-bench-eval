@@ -41,8 +41,9 @@ def aggregate_results():
         
         show_stats[model] = {show: stats["correct"] / stats["total"] for show, stats in show_counts.items()}
 
-    # リーダーボードCSV
+    # リーダーボードCSV（正解率で降順ソート）
     leaderboard_df = pd.DataFrame(leaderboard_data)
+    leaderboard_df = leaderboard_df.sort_values(by="正解率", ascending=False)  # ここでソート
     leaderboard_df.to_csv("leaderboard.csv", index=False, encoding='utf-8-sig')
 
     # 番組ごとの正解率をピボット形式でCSV出力
